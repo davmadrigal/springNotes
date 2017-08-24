@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+#fç
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+      hostname: localhost
+      nonSecurePort: 8080
+      
+      
+spring:
+  application:
+    name: springCloudService1
+ 
