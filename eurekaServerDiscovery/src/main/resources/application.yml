@@ -1,3 +1,40 @@
 server:
-  port: 8761
+  port: ${appPort:8761}
+  
+management:
+  context-path: /admin
+  
+
+info:
+  app:
+    name: '@project.artifactId@'
+  build:
+    version: '@project.version@'
+
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/
+  instance:
+    hostname: ${hostName}
+    statusPageUrlPath: ${management.contextPath}/info
+    healthCheckUrlPath: ${management.contextPath}/health
+    preferIpAddress: true
+    metadataMap:
+      instanceId: ${spring.application.name}:${server.port}
+
+---
+spring:
+  profiles: standalone
+hostName: localhost
+environment: local
+dataCenter: ${hostName}
+peerUrls: http://localhost:${server.port}/eureka/
+
+---
+spring:
+  profiles: peerAware
   

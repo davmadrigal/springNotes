@@ -13,11 +13,11 @@ import com.example.model.Actor;
 public class ActorController {
 	
 	@RequestMapping("/actors")
-	public String findActors() {
+	public List<Actor> findActors() {
 		List<Actor> result = new ArrayList<>();
 		result.add(this.buildActor("1", "First1", "Last1"));
 		result.add(this.buildActor("2", "First2", "Last2"));
-		return result.toString();
+		return result;
 		
 	}
 	
