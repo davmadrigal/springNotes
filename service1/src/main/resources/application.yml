@@ -1,5 +1,5 @@
 server:
-  port: ${appPort:8080}
+  port: ${appPort:8500}
   servlet-path: /api
 
 #SPRING MVC : Enable endpoints access (/admin/info...)
@@ -26,8 +26,8 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
   instance:
-      hostname: ${HOSTNAME}
-      nonSecurePort: 8080
+   preferIpAddress: true
+   statusPageUrlPath: ${server.servlet-path}/info
       
       
 spring:

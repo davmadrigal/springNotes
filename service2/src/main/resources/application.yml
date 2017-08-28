@@ -1,11 +1,9 @@
 server:
   port: ${appPort:8600}
+  servlet-path: /api
 
-# Spring dispatcher servlet (APIs) and actuator endpoint path (/admin/info, /admin/health, ...)
-server.servlet-path: /api
-management.context-path: /admin
+#SPRING MVC : Enable endpoints access (/admin/info...)
 
-# http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
 endpoints:
   enabled: false
   info:
@@ -24,27 +22,15 @@ info:
 eureka:
   client:
     registerWithEureka: true
-    fetchRegistry: true
+    fetch-registry: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka
   instance:
-    hostname: ${hostName}
-    statusPageUrlPath: ${management.context-path}/info
-    healthCheckUrlPath: ${management.context-path}/health
-    preferIpAddress: true
-    metadataMap:
-      instanceId: ${spring.application.name}:${server.port}
+   preferIpAddress: true
+   statusPageUrlPath: ${server.servlet-path}/info
+      
+      
 spring:
   application:
     name: springCloudService2
-    
-the-service-1:
-  ribbon:
-    # Eureka vipAddress of the target service
-    DeploymentContextBasedVipAddresses: springCloudService1
-
-    #listOfServers: localhost:${SERVER.PORT}
-    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
-
-    # Interval to refresh the server list from the source (ms)
-    ServerListRefreshInterval: 30000
+ 
